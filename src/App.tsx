@@ -9,9 +9,9 @@ import MealPlan from "./pages/MealPlan";
 function App() {
   return (
     <Routes>
-      <Route index element={<Signup />} />
       <Route element={<Applayout />}>
-        <Route path="sign-up" element={<Signup />} />
+        <Route index element={<Signup />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="profile" element={<Profile />} />
         <Route path="subscription" element={<Subscription />} />
         <Route path="mealplan" element={<MealPlan />} />
