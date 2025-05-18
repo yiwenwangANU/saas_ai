@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import Button from "../ui/Button";
+import Button from "./Button";
 
 const NavBar = () => {
   return (
