@@ -5,7 +5,6 @@ const Applayout = () => {
   return (
     <div>
       <NavBar />
-
       <Outlet />
     </div>
   );
