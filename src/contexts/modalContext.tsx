@@ -1,19 +1,25 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, FC, ReactNode, useContext, useState } from "react";
 
-interface ModalContextProps {
+type ModalContextProps = {
   open: boolean;
   modalContent: ReactNode;
   handleCloseModal: () => void;
   handleOpenModal: (content: ReactNode) => void;
-}
-export const ModalContext = createContext<ModalContextProps | undefined>(
-  undefined
-);
+};
+const ModalContext = createContext<ModalContextProps | null>(null);
 
-interface ModalProviderProps {
+export const useModalContext = () => {
+  const modalContext = useContext(ModalContext);
+  if (modalContext === null) {
+    throw new Error("Modal context used outof provider!");
+  }
+  return modalContext;
+};
+
+type ModalProviderProps = {
   children: ReactNode;
-}
-export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
+};
+export const ModalProvider: FC<ModalProviderProps> = ({ children }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [modalContent, setModalContent] = useState<ReactNode | null>(null);
 
@@ -23,6 +29,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   };
   const handleOpenModal = (content: ReactNode) => {
     setOpen(true);
+    console.log("123");
     setModalContent(content);
   };
 

@@ -1,9 +1,9 @@
-import { ButtonHTMLAttributes, FC, ReactNode } from "react";
+import { ComponentPropsWithoutRef, FC, ReactNode } from "react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   variant?: "primary" | "secondary" | "login" | "signup";
   children: ReactNode;
-}
+} & ComponentPropsWithoutRef<"button">;
 
 const Button: FC<ButtonProps> = ({
   variant = "primary",
