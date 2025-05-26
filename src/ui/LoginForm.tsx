@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Button from "./Button";
+import useLogin from "../hooks/useLogin";
 
 type Inputs = {
   email: string;
@@ -13,7 +14,14 @@ const Login = () => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const mutation = useLogin();
+
+  const onSubmit: SubmitHandler<Inputs> = ({ email, password }) => {
+    mutation.mutate({
+      email: email,
+      password: password,
+    });
+  };
 
   console.log(watch("email")); // watch input value by passing the name of it
 
