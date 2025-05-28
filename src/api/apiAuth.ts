@@ -12,7 +12,7 @@ type SignupResponse = {
   message: string;
 };
 
-export const SignupUser = async (
+export const signupUser = async (
   userData: SignupData
 ): Promise<SignupResponse> => {
   // send json data this time
