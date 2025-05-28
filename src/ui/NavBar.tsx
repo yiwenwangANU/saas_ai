@@ -3,11 +3,15 @@ import Button from "./Button";
 import { useModalContext } from "../contexts/ModalContext";
 import Login from "./LoginForm";
 import ModalWindow from "./ModalWindow";
+import Signup from "./SignupForm";
 
 const NavBar = () => {
   const { handleOpenModal } = useModalContext();
   const handleLogin = () => {
     handleOpenModal(<Login />);
+  };
+  const handleSignup = () => {
+    handleOpenModal(<Signup />);
   };
   return (
     <>
@@ -27,7 +31,9 @@ const NavBar = () => {
             <Button variant="login" onClick={handleLogin}>
               Log in
             </Button>
-            <Button variant="signup">Sign Up</Button>
+            <Button variant="signup" onClick={handleSignup}>
+              Sign Up
+            </Button>
           </div>
         </div>
       </nav>
