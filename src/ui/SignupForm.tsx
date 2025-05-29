@@ -17,10 +17,11 @@ const Signup = () => {
 
   const mutation = useSignup();
 
-  const onSubmit: SubmitHandler<Inputs> = ({ email, password }) => {
+  const onSubmit: SubmitHandler<Inputs> = ({ email, password, name }) => {
     mutation.mutate({
       email: email,
       password: password,
+      name: name,
     });
   };
 

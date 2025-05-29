@@ -5,6 +5,7 @@ import { axiosPublic } from "./axiosInstance";
 type SignupData = {
   email: string;
   password: string;
+  name: string;
 };
 
 type SignupResponse = {
