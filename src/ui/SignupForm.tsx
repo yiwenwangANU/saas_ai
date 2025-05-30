@@ -24,8 +24,6 @@ const Signup = () => {
     });
   };
 
-  //   console.log(watch("email")); // watch input value by passing the name of it
-
   return (
     <div className="text-black">
       <form onSubmit={handleSubmit(onSubmit)}>
