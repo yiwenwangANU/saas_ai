@@ -11,7 +11,6 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -25,33 +24,75 @@ const Signup = () => {
     });
   };
 
-  console.log(watch("email")); // watch input value by passing the name of it
+  //   console.log(watch("email")); // watch input value by passing the name of it
 
   return (
     <div className="text-black">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="px-4 flex flex-col gap-2 items-left">
-          <label>Email</label>
+        <div className="px-4 flex flex-col gap-1 items-left">
+          <label className="font-semibold text-xs text-gray-700 py-1">
+            Email
+          </label>
           <input
-            {...register("email")}
-            className="border-green-300 border-2 rounded-xl px-1  focus:border-green-300 focus:outline-none"
+            {...register("email", {
+              required: "Email is required",
+              maxLength: 20,
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email address",
+              },
+            })}
+            className="border-green-500 border-1 rounded-lg px-1 py-1 text-sm focus:border-green-300 focus:outline-none"
           />
-
-          <label>Password</label>
+          {errors.email && (
+            <span className="text-red-500 text-xs">{errors.email.message}</span>
+          )}
+          <label className="font-semibold text-xs text-gray-700 py-1">
+            Password
+          </label>
           <input
-            {...register("password", { required: true })}
-            className="border-green-300 border-2 rounded-xl px-1  focus:border-green-300 focus:outline-none"
+            {...register("password", {
+              required: "Password is required",
+              maxLength: {
+                value: 20,
+                message: "Password should contain 5-20 chars",
+              },
+              minLength: {
+                value: 5,
+                message: "Password should contain 5-20 chars",
+              },
+            })}
+            type="password"
+            className="border-green-500 border-1 rounded-lg px-1 py-1 text-sm focus:border-green-300 focus:outline-none"
           />
           {/* errors will return when field validation fails  */}
-          {errors.password && <span>This field is required</span>}
+          {errors.password && (
+            <span className="text-red-500 text-xs">
+              {errors.password.message}
+            </span>
+          )}
 
-          <label>Name</label>
+          <label className="font-semibold text-xs text-gray-700 py-1">
+            Nickname
+          </label>
           <input
-            {...register("name", { required: true })}
-            className="border-green-300 border-2 rounded-xl px-1  focus:border-green-300 focus:outline-none"
+            {...register("name", {
+              required: "Nickname is required",
+              maxLength: {
+                value: 20,
+                message: "Nickname should contain 5-20 chars",
+              },
+              minLength: {
+                value: 5,
+                message: "Nickname should contain 5-20 chars",
+              },
+            })}
+            className="border-green-500 border-1 rounded-lg px-1 py-1 text-sm focus:border-green-300 focus:outline-none"
           />
           {/* errors will return when field validation fails  */}
-          {errors.name && <span>This field is required</span>}
+          {errors.name && (
+            <span className="text-red-500 text-xs">{errors.name.message}</span>
+          )}
           <div className="flex justify-end pt-3">
             <Button variant="login">Create User</Button>
           </div>
