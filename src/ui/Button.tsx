@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, FC, ReactNode } from "react";
 
 type ButtonProps = {
-  variant?: "primary" | "secondary" | "login" | "signup" | "oauth";
+  variant?: "primary" | "secondary" | "login" | "signup";
   children: ReactNode;
 } & ComponentPropsWithoutRef<"button">;
 
@@ -28,10 +28,6 @@ const Button: FC<ButtonProps> = ({
       break;
     case "signup":
       variantStyles = "text-white bg-green-500 hover:bg-green-600";
-      break;
-    case "oauth":
-      variantStyles =
-        "px-4 text-black bg-white border border-1 border-gray-200 hover:bg-gray-100";
       break;
   }
 

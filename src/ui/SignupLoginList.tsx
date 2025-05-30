@@ -1,4 +1,6 @@
 import Button from "./Button";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebook } from "react-icons/fa";
 
 const SignupLoginList = () => {
   return (
@@ -8,8 +10,18 @@ const SignupLoginList = () => {
         Use your email or another service to continue
       </div>
       <div className="flex flex-col gap-2 pt-4">
-        <Button variant="oauth">Continue with Google</Button>
-        <Button variant="oauth">Continue with Facebook</Button>
+        <Button variant="login">
+          <div className="relative flex items-center justify-center">
+            <FcGoogle className="absolute left-1" size={20} />
+            <span>Continue with Google</span>
+          </div>
+        </Button>
+        <Button variant="login">
+          <div className="relative flex items-center justify-center">
+            <FaFacebook className="absolute left-1 text-blue-600" size={20} />
+            <span>Continue with Facebook</span>
+          </div>
+        </Button>
         <Button variant="signup">Continue with Email</Button>
       </div>
     </div>
