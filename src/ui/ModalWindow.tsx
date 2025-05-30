@@ -15,7 +15,7 @@ function ModalWindow() {
         <div className="fixed inset-0 flex items-center justify-center ">
           <div
             ref={modalref}
-            className="bg-white rounded-xl h-fit relative overflow-auto md:w-2/3 lg:w-5/12 px-4 py-5"
+            className="bg-white rounded-xl h-fit relative overflow-auto w-fit px-8 py-8"
           >
             <XMarkIcon
               className="w-6 h-6 p-1 absolute top-2 right-2 hover:bg-slate-100 hover:rounded-2xl hover:cursor-pointer"

@@ -1,14 +1,14 @@
 import { Link } from "react-router";
 import Button from "./Button";
 import { useModalContext } from "../contexts/ModalContext";
-import Login from "./LoginForm";
 import ModalWindow from "./ModalWindow";
 import Signup from "./SignupForm";
+import SignupLoginList from "./SignupLoginList";
 
 const NavBar = () => {
   const { handleOpenModal } = useModalContext();
   const handleLogin = () => {
-    handleOpenModal(<Login />);
+    handleOpenModal(<SignupLoginList />);
   };
   const handleSignup = () => {
     handleOpenModal(<Signup />);
