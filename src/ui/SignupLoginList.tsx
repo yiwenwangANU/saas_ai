@@ -1,4 +1,5 @@
 import Button from "./Button";
+import Login from "./LoginForm";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -6,7 +7,10 @@ import { useModalContext } from "../contexts/ModalContext";
 
 const SignupLoginList = () => {
   const { handleLogin } = useAuthContext();
-  const { handleCloseModal } = useModalContext();
+  const { handleOpenModal, handleCloseModal } = useModalContext();
+  const handleEmailLogin = () => {
+    handleOpenModal(<Login />);
+  };
   const handleGoogleLogin = () => {
     window.open(
       `${import.meta.env.VITE_API_BASE_URL}/auth/google`,
@@ -42,7 +46,9 @@ const SignupLoginList = () => {
             <span>Continue with Facebook</span>
           </div>
         </Button>
-        <Button variant="signup">Continue with Email</Button>
+        <Button variant="signup" onClick={handleEmailLogin}>
+          Continue with Email
+        </Button>
       </div>
     </div>
   );

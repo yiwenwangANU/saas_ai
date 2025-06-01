@@ -29,7 +29,6 @@ export const ModalProvider: FC<ModalProviderProps> = ({ children }) => {
   };
   const handleOpenModal = (content: ReactNode) => {
     setOpen(true);
-    console.log("123");
     setModalContent(content);
   };
 
