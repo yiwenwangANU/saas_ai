@@ -8,7 +8,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 
 const NavBar = () => {
   const { handleOpenModal } = useModalContext();
-  const { isLoggin, handleLogout } = useAuthContext();
+  const { isLoggin, username, handleLogout } = useAuthContext();
   const handleLogin = () => {
     handleOpenModal(<SignupLoginList />);
   };
@@ -29,11 +29,14 @@ const NavBar = () => {
             <div>Items 2</div>
             <div>Items 3</div>
           </div>
-          <div className="flex flex-row gap-5 text-black px-20">
-            {isLoggin ? (
-              <Button variant="login" onClick={handleLogout}>
-                Log out
-              </Button>
+          <div className="flex flex-row items-center gap-5 text-black px-20">
+            {isLoggin && username ? (
+              <>
+                <div className="text-sm">{username.split(" ")[0]}</div>
+                <Button variant="login" onClick={handleLogout}>
+                  Log out
+                </Button>
+              </>
             ) : (
               <>
                 <Button variant="login" onClick={handleLogin}>
