@@ -1,10 +1,14 @@
 import Button from "./Button";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
+import { useAuthContext } from "../contexts/AuthContext";
+import { useModalContext } from "../contexts/ModalContext";
 
 const SignupLoginList = () => {
+  const { handleLogin } = useAuthContext();
+  const { handleCloseModal } = useModalContext();
   const handleGoogleLogin = () => {
-    const authWindow = window.open(
+    window.open(
       `${import.meta.env.VITE_API_BASE_URL}/auth/google`,
       "_blank",
       "width=500,height=600"
@@ -14,7 +18,8 @@ const SignupLoginList = () => {
       if (event.origin !== `${import.meta.env.VITE_API_BASE_URL}`) return;
       const { token } = event.data;
       if (token) {
-        localStorage.setItem("token", token);
+        handleLogin(token);
+        handleCloseModal();
       }
     });
   };

@@ -4,9 +4,11 @@ import { useModalContext } from "../contexts/ModalContext";
 import ModalWindow from "./ModalWindow";
 import Signup from "./SignupForm";
 import SignupLoginList from "./SignupLoginList";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const NavBar = () => {
   const { handleOpenModal } = useModalContext();
+  const { isLoggin, handleLogout } = useAuthContext();
   const handleLogin = () => {
     handleOpenModal(<SignupLoginList />);
   };
@@ -28,12 +30,20 @@ const NavBar = () => {
             <div>Items 3</div>
           </div>
           <div className="flex flex-row gap-5 text-black px-20">
-            <Button variant="login" onClick={handleLogin}>
-              Log in
-            </Button>
-            <Button variant="signup" onClick={handleSignup}>
-              Sign Up
-            </Button>
+            {isLoggin ? (
+              <Button variant="login" onClick={handleLogout}>
+                Log out
+              </Button>
+            ) : (
+              <>
+                <Button variant="login" onClick={handleLogin}>
+                  Log in
+                </Button>
+                <Button variant="signup" onClick={handleSignup}>
+                  Sign Up
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </nav>
