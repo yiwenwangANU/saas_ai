@@ -2,13 +2,16 @@ import { useMutation } from "@tanstack/react-query";
 import { loginWithGoogle } from "../api/apiAuth";
 import { toast } from "react-toastify";
 import { useModalContext } from "../contexts/ModalContext";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const useGoogleLogin = () => {
   const { handleCloseModal } = useModalContext();
+  const { handleLogin } = useAuthContext();
   return useMutation({
     mutationFn: loginWithGoogle,
-    onSuccess: () => {
+    onSuccess: (token) => {
       toast.success("User login successfully!");
+      handleLogin(token);
       handleCloseModal();
     },
     onError: (error) => {
