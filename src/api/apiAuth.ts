@@ -65,3 +65,24 @@ export const loginUser = async (
     throw error; // Rethrow for error handling in components
   }
 };
+
+export const loginWithGoogle = async (): Promise<string> => {
+  // send json data this time
+  return new Promise((resolve, reject) => {
+    window.open(
+      `${import.meta.env.VITE_API_BASE_URL}/auth/google`,
+      "_blank",
+      "width=500,height=600"
+    );
+
+    window.addEventListener("message", (event) => {
+      if (event.origin !== `${import.meta.env.VITE_API_BASE_URL}`) return;
+      const { token } = event.data;
+      if (token) {
+        resolve(token);
+      } else {
+        reject(new Error("No token received from OAuth flow"));
+      }
+    });
+  });
+};

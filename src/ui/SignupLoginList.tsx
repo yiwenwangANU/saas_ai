@@ -2,31 +2,19 @@ import Button from "./Button";
 import Login from "./LoginForm";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
-import { useAuthContext } from "../contexts/AuthContext";
 import { useModalContext } from "../contexts/ModalContext";
+import useGoogleLogin from "../hooks/useGoogleLogin";
 
 const SignupLoginList = () => {
-  const { handleLogin } = useAuthContext();
-  const { handleOpenModal, handleCloseModal } = useModalContext();
+  const { handleOpenModal } = useModalContext();
+  const mutation = useGoogleLogin();
   const handleEmailLogin = () => {
     handleOpenModal(<Login />);
   };
   const handleGoogleLogin = () => {
-    window.open(
-      `${import.meta.env.VITE_API_BASE_URL}/auth/google`,
-      "_blank",
-      "width=500,height=600"
-    );
-
-    window.addEventListener("message", (event) => {
-      if (event.origin !== `${import.meta.env.VITE_API_BASE_URL}`) return;
-      const { token } = event.data;
-      if (token) {
-        handleLogin(token);
-        handleCloseModal();
-      }
-    });
+    mutation.mutate();
   };
+
   return (
     <div className="flex flex-col gap-3">
       <div className="text-2xl font-serif">Log in or sign up in seconds</div>
