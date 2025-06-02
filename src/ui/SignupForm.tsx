@@ -28,26 +28,26 @@ const Signup = () => {
     <div className="text-black">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="px-4 flex flex-col gap-1 items-left">
-          <label className="font-semibold text-xs text-gray-700 py-1">
-            Email
-          </label>
+          <label className="font-semibold text-gray-700">Email</label>
           <input
             {...register("email", {
               required: "Email is required",
-              maxLength: 20,
+              maxLength: {
+                value: 20,
+                message: "Email must be at most 20 characters long",
+              },
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                 message: "Enter a valid email address",
               },
             })}
-            className="border-green-500 border-1 rounded-lg px-1 py-1 text-sm focus:border-green-300 focus:outline-none"
+            className="border-gray-300 border-1 rounded px-2 py-1 w-80 focus:border-black focus:outline-none"
+            placeholder="Enter email"
           />
           {errors.email && (
-            <span className="text-red-500 text-xs">{errors.email.message}</span>
+            <span className="text-red-500 text-sm">{errors.email.message}</span>
           )}
-          <label className="font-semibold text-xs text-gray-700 py-1">
-            Password
-          </label>
+          <label className="font-semibold text-gray-700">Password</label>
           <input
             {...register("password", {
               required: "Password is required",
@@ -61,18 +61,17 @@ const Signup = () => {
               },
             })}
             type="password"
-            className="border-green-500 border-1 rounded-lg px-1 py-1 text-sm focus:border-green-300 focus:outline-none"
+            className="border-gray-300 border-1 rounded px-2 py-1 w-80 focus:border-black focus:outline-none"
+            placeholder="Enter password"
           />
           {/* errors will return when field validation fails  */}
           {errors.password && (
-            <span className="text-red-500 text-xs">
+            <span className="text-red-500 text-sm">
               {errors.password.message}
             </span>
           )}
 
-          <label className="font-semibold text-xs text-gray-700 py-1">
-            Nickname
-          </label>
+          <label className="font-semibold text-gray-700">Nickname</label>
           <input
             {...register("name", {
               required: "Nickname is required",
@@ -85,15 +84,15 @@ const Signup = () => {
                 message: "Nickname should contain 5-20 chars",
               },
             })}
-            className="border-green-500 border-1 rounded-lg px-1 py-1 text-sm focus:border-green-300 focus:outline-none"
+            className="border-gray-300 border-1 rounded px-2 py-1 w-80 focus:border-black focus:outline-none"
+            placeholder="Enter nickname"
           />
           {/* errors will return when field validation fails  */}
           {errors.name && (
-            <span className="text-red-500 text-xs">{errors.name.message}</span>
+            <span className="text-red-500 text-sm">{errors.name.message}</span>
           )}
-          <div className="flex justify-end pt-3">
-            <Button variant="login">Create User</Button>
-          </div>
+          <br />
+          <Button variant="signup">Create User</Button>
         </div>
       </form>
     </div>

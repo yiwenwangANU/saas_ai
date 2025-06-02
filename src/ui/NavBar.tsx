@@ -21,15 +21,19 @@ const NavBar = () => {
         <div className="fixed top-0 flex flex-row justify-between w-full bg-white items-center ">
           <div className="flex flex-row items-center gap-4 text-gray-800 text-sm">
             <Link to={"/"}>
-              <img className="w-24 px-7 py-3" src="logo.png" alt="logo" />
+              <img className="w-28 px-7 py-3" src="logo.png" alt="logo" />
             </Link>
-            <div className="rounded px-3 py-1 hover:bg-gray-100 cursor-pointer">
+            <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
               Items 1
             </div>
-            <div>Items 2</div>
-            <div>Items 3</div>
+            <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
+              Items 2
+            </div>
+            <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
+              Items 3
+            </div>
           </div>
-          <div className="flex flex-row items-center gap-5 text-black px-20">
+          <div className="flex flex-row items-center gap-7 text-black px-20">
             {isLoggin && username ? (
               <>
                 <div className="text-sm">{username.split(" ")[0]}</div>
