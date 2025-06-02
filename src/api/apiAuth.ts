@@ -42,20 +42,15 @@ type LoginResponse = {
   token: string;
   userId: string;
 };
-export const loginUser = async (
-  userData: LoginData
-): Promise<LoginResponse> => {
+export const loginUser = async (userData: LoginData): Promise<string> => {
   // send json data this time
   try {
     const response = await axiosPublic.post<LoginResponse>(
       `/auth/login`,
       userData
     );
-    // store jwt in local browser
-    const { token, userId } = response.data;
-    localStorage.setItem("token", token);
-    localStorage.setItem("userId", userId);
-    return response.data;
+    const { token } = response.data;
+    return token;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios error:", error.message);

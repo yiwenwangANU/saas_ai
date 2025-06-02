@@ -3,13 +3,16 @@ import { loginUser } from "../api/apiAuth";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useModalContext } from "../contexts/ModalContext";
+import { useAuthContext } from "../contexts/AuthContext";
 
 const useLogin = () => {
   const { handleCloseModal } = useModalContext();
+  const { handleLogin } = useAuthContext();
   return useMutation({
     mutationFn: loginUser,
-    onSuccess: () => {
+    onSuccess: (token) => {
       toast.success("User login successfully!");
+      handleLogin(token);
       handleCloseModal();
     },
     onError: (error) => {
