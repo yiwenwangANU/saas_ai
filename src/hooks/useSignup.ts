@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signupUser } from "../api/apiAuth";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
+import { useModalContext } from "../contexts/ModalContext";
 
 type ErrorResponse = {
   message?: string;
@@ -9,10 +10,12 @@ type ErrorResponse = {
 };
 
 const useSignup = () => {
+  const { handleCloseModal } = useModalContext();
   return useMutation({
     mutationFn: signupUser,
     onSuccess: () => {
       toast.success("User created successfully!");
+      handleCloseModal();
     },
     onError: (error: AxiosError) => {
       console.error("Error signing up:", error);
