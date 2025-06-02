@@ -33,8 +33,8 @@ const Signup = () => {
             {...register("email", {
               required: "Email is required",
               maxLength: {
-                value: 20,
-                message: "Email must be at most 20 characters long",
+                value: 40,
+                message: "Email must be at most 40 characters long",
               },
               pattern: {
                 value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,

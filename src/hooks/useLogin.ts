@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { loginUser } from "../api/apiAuth";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 const useLogin = () => {
   return useMutation({
@@ -10,7 +11,10 @@ const useLogin = () => {
     },
     onError: (error) => {
       console.error("Error logining in:", error);
-      const message = error.message || "Error logining in";
+      let message = "Error logining in";
+      if (error instanceof AxiosError) {
+        message = error.response?.data?.message || error.message || message;
+      }
       toast.error("Error logining in: " + message);
     },
   });

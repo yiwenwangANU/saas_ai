@@ -10,7 +10,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -22,8 +21,6 @@ const Login = () => {
       password: password,
     });
   };
-
-  console.log(watch("email")); // watch input value by passing the name of it
 
   return (
     <div className="text-black">

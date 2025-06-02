@@ -36,7 +36,7 @@ const NavBar = () => {
           <div className="flex flex-row items-center gap-7 text-black px-20">
             {isLoggin && username ? (
               <>
-                <div className="text-sm">{username.split(" ")[0]}</div>
+                <div className="font-semibold">{username.split(" ")[0]}</div>
                 <Button variant="login" onClick={handleLogout}>
                   Log out
                 </Button>
