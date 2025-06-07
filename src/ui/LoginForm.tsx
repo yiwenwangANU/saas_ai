@@ -48,6 +48,7 @@ const Login = () => {
           </label>
           <input
             {...register("password", { required: "Password is required" })}
+            type="password"
             className="border-gray-300 border-1 rounded px-2 py-1 w-80 focus:border-black focus:outline-none"
             placeholder="Enter password"
           />
