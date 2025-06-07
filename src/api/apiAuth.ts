@@ -9,8 +9,8 @@ type SignupData = {
 };
 
 type SignupResponse = {
-  userId: string;
   message: string;
+  user: { id: string; email: string; name: string };
 };
 
 export const signupUser = async (
@@ -39,6 +39,7 @@ type LoginData = {
   password: string;
 };
 type LoginResponse = {
+  message: string;
   token: string;
   userId: string;
 };
