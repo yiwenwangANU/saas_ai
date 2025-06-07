@@ -26,10 +26,11 @@ const Button: FC<ButtonProps> = ({
         "px-5 text-black bg-white border border-1 border-gray-200 hover:bg-gray-100";
       break;
     case "signup":
-      variantStyles = "text-white bg-emerald-500 hover:bg-green-600";
+      variantStyles = "text-white bg-emerald-500 hover:bg-emerald-600";
       break;
     case "getStart":
-      variantStyles = "text-emerald-500 bg-white text-lg px-5";
+      variantStyles =
+        "text-emerald-500 bg-white text-lg px-5 hover:bg-gray-100";
       break;
   }
 
