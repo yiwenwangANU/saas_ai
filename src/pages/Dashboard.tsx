@@ -4,8 +4,22 @@ import {
   UserPlusIcon,
 } from "@heroicons/react/16/solid";
 import Button from "../ui/Button";
+import { useAuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router";
+import { useModalContext } from "../contexts/ModalContext";
+import SignupLoginList from "../ui/SignupLoginList";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+  const { isLoggin } = useAuthContext();
+  const { handleOpenModal } = useModalContext();
+  const handleGetStart = () => {
+    if (isLoggin) {
+      navigate("/mealplan");
+    } else {
+      handleOpenModal(<SignupLoginList />);
+    }
+  };
   return (
     <div className="bg-gray-100">
       <div className="flex flex-col gap-4 items-center bg-gradient-to-r from-emerald-400 to-emerald-600 mx-20 rounded-xl py-10 my-10">
@@ -16,7 +30,9 @@ const Dashboard = () => {
           Let our AI do the planning. You forcus on cooking and enjoying!
         </div>
         <div className="py-4">
-          <Button variant="getStart">Get Started</Button>
+          <Button variant="getStart" onClick={handleGetStart}>
+            Get Started
+          </Button>
         </div>
       </div>
       <div className="flex flex-col gap-3 items-center py-20">
