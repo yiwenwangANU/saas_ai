@@ -1,27 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
-import { loginUser } from "../api/apiAuth";
+import { LoginResponse, loginUser } from "../api/apiAuth";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useModalContext } from "../contexts/ModalContext";
 import { useAuthContext } from "../contexts/AuthContext";
+import { ErrorResponse } from "./useSignup";
 
 const useLogin = () => {
   const { handleCloseModal } = useModalContext();
   const { handleLogin } = useAuthContext();
   return useMutation({
     mutationFn: loginUser,
-    onSuccess: (token) => {
-      toast.success("User login successfully!");
+    onSuccess: (data: LoginResponse) => {
+      const { token, message } = data;
+      toast.success(message);
       handleLogin(token);
       handleCloseModal();
     },
-    onError: (error) => {
+    onError: (error: AxiosError) => {
       console.error("Error logining in:", error);
-      let message = "Error logining in";
-      if (error instanceof AxiosError) {
-        message = error.response?.data?.message || error.message || message;
-      }
-      toast.error("Error logining in: " + message);
+      // axios will wrap backend error in error.response.data
+      const data = error.response?.data as ErrorResponse;
+      const message = data?.message || error.message || "Error signing up";
+      toast.error("Error signing up: " + message);
     },
   });
 };

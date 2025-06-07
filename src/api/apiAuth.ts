@@ -38,20 +38,21 @@ type LoginData = {
   email: string;
   password: string;
 };
-type LoginResponse = {
+export type LoginResponse = {
   message: string;
   token: string;
-  userId: string;
+  name: string;
 };
-export const loginUser = async (userData: LoginData): Promise<string> => {
+export const loginUser = async (
+  userData: LoginData
+): Promise<LoginResponse> => {
   // send json data this time
   try {
     const response = await axiosPublic.post<LoginResponse>(
       `/auth/login`,
       userData
     );
-    const { token } = response.data;
-    return token;
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios error:", error.message);
