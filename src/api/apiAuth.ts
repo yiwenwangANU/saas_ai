@@ -8,7 +8,7 @@ type SignupData = {
   name: string;
 };
 
-type SignupResponse = {
+export type SignupResponse = {
   message: string;
   user: { id: string; email: string; name: string };
 };
