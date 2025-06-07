@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 
 const Applayout = () => {
   return (
-    <div>
+    <div className="grid grid-rows-[auto-1fr]">
       <NavBar />
       <Outlet />
     </div>

@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <>
       <nav>
-        <div className="fixed top-0 flex flex-row justify-between w-full bg-white items-center ">
+        <div className="flex flex-row justify-between w-full bg-white items-center ">
           <div className="flex flex-row items-center gap-4 text-gray-800 text-sm">
             <Link to={"/"}>
               <img className="w-28 px-7 py-3" src="logo.png" alt="logo" />
