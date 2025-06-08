@@ -63,23 +63,26 @@ export const loginUser = async (
   }
 };
 
-export const loginWithGoogle = async (): Promise<string> => {
-  // send json data this time
+export const loginWithGoogle = (): Promise<LoginResponse> => {
   return new Promise((resolve, reject) => {
+    // send json data this time
     window.open(
       `${import.meta.env.VITE_API_BASE_URL}/auth/google`,
       "_blank",
       "width=500,height=600"
     );
 
-    window.addEventListener("message", (event) => {
+    const handleMessage = (event: MessageEvent) => {
       if (event.origin !== `${import.meta.env.VITE_API_BASE_URL}`) return;
-      const { token } = event.data;
+      const { token, message, name } = event.data;
       if (token) {
-        resolve(token);
+        window.removeEventListener("message", handleMessage); // cleanup
+        resolve({ token, message, name });
       } else {
+        window.removeEventListener("message", handleMessage); // cleanup
         reject(new Error("No token received from OAuth flow"));
       }
-    });
+    };
+    window.addEventListener("message", handleMessage);
   });
 };

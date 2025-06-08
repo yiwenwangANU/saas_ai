@@ -62,7 +62,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
     setIsLoggin(false);
+    setUsername(null);
     setToken(null);
   };
 

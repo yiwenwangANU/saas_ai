@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { loginWithGoogle } from "../api/apiAuth";
+import { LoginResponse, loginWithGoogle } from "../api/apiAuth";
 import { toast } from "react-toastify";
 import { useModalContext } from "../contexts/ModalContext";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -9,8 +9,9 @@ const useGoogleLogin = () => {
   const { handleLogin } = useAuthContext();
   return useMutation({
     mutationFn: loginWithGoogle,
-    onSuccess: (token) => {
-      toast.success("User login successfully!");
+    onSuccess: (data: LoginResponse) => {
+      const { token, message } = data;
+      toast.success(message);
       handleLogin(token);
       handleCloseModal();
     },
