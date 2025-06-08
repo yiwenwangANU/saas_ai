@@ -41,16 +41,21 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
+    const savedUsername = localStorage.getItem("username");
     if (savedToken) {
       setIsLoggin(true);
+      setUsername(savedUsername);
       setToken(savedToken);
     }
   }, []);
 
   const handleLogin = (newToken: string) => {
-    localStorage.setItem("token", newToken);
     const decoded = jwtDecode<JwtPayload>(newToken);
     const { name } = decoded;
+
+    localStorage.setItem("token", newToken);
+    localStorage.setItem("username", name);
+
     setUsername(name);
     setIsLoggin(true);
     setToken(newToken);
