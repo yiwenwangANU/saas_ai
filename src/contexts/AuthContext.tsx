@@ -15,7 +15,7 @@ type AuthContextProps = {
   redirectUrl: string | null;
   handleLogin: (token: string) => void;
   handleLogout: () => void;
-  handleSetRedirect: (url: string) => void;
+  handleSetRedirect: (url: string | null) => void;
 };
 const AuthContext = createContext<AuthContextProps | null>(null);
 
@@ -70,9 +70,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     setUsername(null);
     setToken(null);
   };
-  const handleSetRedirect = (url: string) => {
+  const handleSetRedirect = (url: string | null) => {
     setRedirectUrl(url);
   };
+
   return (
     <AuthContext.Provider
       value={{

@@ -5,10 +5,12 @@ import { AxiosError } from "axios";
 import { useModalContext } from "../contexts/ModalContext";
 import { useAuthContext } from "../contexts/AuthContext";
 import { ErrorResponse } from "./useSignup";
+import { useNavigate } from "react-router";
 
 const useLogin = () => {
   const { handleCloseModal } = useModalContext();
-  const { handleLogin } = useAuthContext();
+  const { redirectUrl, handleLogin, handleSetRedirect } = useAuthContext();
+  const navigate = useNavigate();
   return useMutation({
     mutationFn: loginUser,
     onSuccess: (data: LoginResponse) => {
@@ -16,6 +18,10 @@ const useLogin = () => {
       toast.success(message);
       handleLogin(token);
       handleCloseModal();
+      if (redirectUrl) {
+        navigate(redirectUrl);
+        handleSetRedirect(null);
+      }
     },
     onError: (error: AxiosError) => {
       console.error("Error logining in:", error);
