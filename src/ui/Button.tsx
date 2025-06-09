@@ -1,7 +1,14 @@
 import { ComponentPropsWithoutRef, FC, ReactNode } from "react";
 
 type ButtonProps = {
-  variant?: "primary" | "secondary" | "login" | "signup" | "getStart";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "login"
+    | "signup"
+    | "getStart"
+    | "subscribe"
+    | "subscribeMonthly";
   children: ReactNode;
 } & ComponentPropsWithoutRef<"button">;
 
@@ -31,6 +38,14 @@ const Button: FC<ButtonProps> = ({
     case "getStart":
       variantStyles =
         "text-emerald-500 bg-white text-lg px-5 hover:bg-gray-100";
+      break;
+    case "subscribe":
+      variantStyles =
+        "py-3 bg-emerald-200 text-emerald-950 rounded hover:bg-emerald-300";
+      break;
+    case "subscribeMonthly":
+      variantStyles =
+        "py-3 bg-emerald-600 text-white rounded hover:bg-emerald-700";
       break;
   }
 
