@@ -11,13 +11,14 @@ import SignupLoginList from "../ui/SignupLoginList";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { isLoggin } = useAuthContext();
+  const { isLoggin, handleSetRedirect } = useAuthContext();
   const { handleOpenModal } = useModalContext();
   const handleGetStart = () => {
     if (isLoggin) {
       navigate("/mealplan");
     } else {
       handleOpenModal(<SignupLoginList />);
+      handleSetRedirect("/mealplan");
     }
   };
   return (
