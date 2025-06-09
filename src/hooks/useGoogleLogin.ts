@@ -3,10 +3,12 @@ import { LoginResponse, loginWithGoogle } from "../api/apiAuth";
 import { toast } from "react-toastify";
 import { useModalContext } from "../contexts/ModalContext";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router";
 
 const useGoogleLogin = () => {
   const { handleCloseModal } = useModalContext();
-  const { handleLogin } = useAuthContext();
+  const { handleLogin, redirectUrl, handleSetRedirect } = useAuthContext();
+  const navigate = useNavigate();
   return useMutation({
     mutationFn: loginWithGoogle,
     onSuccess: (data: LoginResponse) => {
@@ -14,6 +16,10 @@ const useGoogleLogin = () => {
       toast.success(message);
       handleLogin(token);
       handleCloseModal();
+      if (redirectUrl) {
+        navigate(redirectUrl);
+        handleSetRedirect(null);
+      }
     },
     onError: (error) => {
       console.error("Error logining in:", error);
