@@ -36,7 +36,10 @@ const Subscription = () => {
             </ul>
             <Button variant="subscribe">Subscribe Weekly Plan</Button>
           </div>
-          <div className="border-2 border-gray-200 rounded-3xl shadow-xl flex flex-col gap-10 px-14 pt-7 pb-10 hover:scale-[1.02] duration-100">
+          <div className="relative border-2 border-gray-200 rounded-3xl shadow-xl flex flex-col gap-10 px-14 pt-7 pb-10 hover:scale-[1.02] duration-100">
+            <div className="absolute -top-4 bg-emerald-500 text-white rounded-2xl w-fit px-7 py-1 capitalize font-semibold">
+              Most Popular
+            </div>
             <div className="text-2xl font-bold">Monthly Plan</div>
             <div>
               <span className="text-7xl font-bold">$39.99</span>

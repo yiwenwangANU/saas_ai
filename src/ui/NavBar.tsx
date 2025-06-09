@@ -23,9 +23,11 @@ const NavBar = () => {
             <Link to={"/"}>
               <img className="w-28 px-7 py-3" src="logo.png" alt="logo" />
             </Link>
-            <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
-              Items 1
-            </div>
+            <Link to={"subscription"}>
+              <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
+                Subscription
+              </div>
+            </Link>
             <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
               Items 2
             </div>
