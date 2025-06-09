@@ -12,8 +12,10 @@ type AuthContextProps = {
   isLoggin: boolean;
   username: string | null;
   token: string | null;
+  redirectUrl: string | null;
   handleLogin: (token: string) => void;
   handleLogout: () => void;
+  handleSetRedirect: (url: string) => void;
 };
 const AuthContext = createContext<AuthContextProps | null>(null);
 
@@ -38,6 +40,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const [isLoggin, setIsLoggin] = useState<boolean>(false);
   const [username, setUsername] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
@@ -67,10 +70,20 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     setUsername(null);
     setToken(null);
   };
-
+  const handleSetRedirect = (url: string) => {
+    setRedirectUrl(url);
+  };
   return (
     <AuthContext.Provider
-      value={{ isLoggin, username, token, handleLogin, handleLogout }}
+      value={{
+        isLoggin,
+        username,
+        token,
+        redirectUrl,
+        handleLogin,
+        handleLogout,
+        handleSetRedirect,
+      }}
     >
       {children}
     </AuthContext.Provider>
