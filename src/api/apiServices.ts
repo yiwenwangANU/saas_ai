@@ -2,16 +2,16 @@ import axios from "axios";
 import { axiosPublic } from "./axiosInstance";
 
 // Subscribe user
-type SubscribeData = {
+export type SubscribeData = {
   email: string;
   priceId: string;
 };
 
-type SubscribeResponse = {
+export type SubscribeResponse = {
   sessionId: string;
 };
 
-export const signupUser = async (
+export const createCheckoutSession = async (
   subscribeData: SubscribeData
 ): Promise<SubscribeResponse> => {
   // send json data this time
