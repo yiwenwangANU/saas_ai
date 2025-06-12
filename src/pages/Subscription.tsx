@@ -1,6 +1,46 @@
-import { CheckIcon } from "@heroicons/react/16/solid";
-import Button from "../ui/Button";
 import useCheckout from "../hooks/useCheckout";
+import { SubscriptionPlan } from "../ui/SubscriptionPlan";
+
+const SUBSCRIPTION_PLANS = [
+  {
+    interval: "week",
+    priceId: import.meta.env.VITE_STRIPE_PRICE_ID_WEEKLY,
+    amount: 9.99,
+    label: "Weekly Plan",
+    description: "Great if you want to try service before committing longer.",
+    services: [
+      "Ultimated AI meal plans",
+      "AI nutrition insights",
+      "Cancel anytime",
+    ],
+  },
+  {
+    interval: "month",
+    priceId: import.meta.env.VITE_STRIPE_PRICE_ID_MONTHLY,
+    amount: 39.99,
+    label: "Monthly Plan",
+    description:
+      "Prefer for ongoing, month-to-month meal planning and features.",
+    services: [
+      "Ultimated AI meal plans",
+      "Priority AI support",
+      "Cancel anytime",
+    ],
+  },
+  {
+    interval: "year",
+    priceId: import.meta.env.VITE_STRIPE_PRICE_ID_YEARLY,
+    amount: 279.99,
+    label: "Yearly Plan",
+    description:
+      "Best value for those committed to imporving their diet long term.",
+    services: [
+      "Ultimated AI meal plans",
+      "All premium features",
+      "Cancel anytime",
+    ],
+  },
+];
 
 const Subscription = () => {
   const { mutate: checkout, isPending, isError, error } = useCheckout();
@@ -13,84 +53,19 @@ const Subscription = () => {
           you're ready.
         </div>
         <div className="flex flex-row gap-10 items-center px-10">
-          <div className="border-2 border-gray-200 rounded-3xl shadow-xl flex flex-col gap-10 px-14 pt-7 pb-10 hover:scale-[1.02] duration-100">
-            <div className="text-2xl font-bold">Weekly Plan</div>
-            <div>
-              <span className="text-7xl font-bold">$9.99</span>
-              <span className="font-bold text-lg">/week</span>
-            </div>
-            <div className="text-xl">
-              Great if you want to try service before committing longer.
-            </div>
-            <ul className="flex flex-col gap-3 text-xl">
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                Ultimated AI meal plans
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                AI nutrition insights
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                Cancel anytime
-              </li>
-            </ul>
-            <Button variant="subscribe">Subscribe Weekly Plan</Button>
-          </div>
-          <div className="relative border-2 border-gray-200 rounded-3xl shadow-xl flex flex-col gap-10 px-14 pt-7 pb-10 hover:scale-[1.02] duration-100">
-            <div className="absolute -top-4 bg-emerald-500 text-white rounded-2xl w-fit px-7 py-1 capitalize font-semibold">
-              Most Popular
-            </div>
-            <div className="text-2xl font-bold">Monthly Plan</div>
-            <div>
-              <span className="text-7xl font-bold">$39.99</span>
-              <span className="font-bold text-lg">/week</span>
-            </div>
-            <div className="text-xl">
-              Prefer for ongoing, month-to-month meal planning and features.
-            </div>
-            <ul className="flex flex-col gap-3 text-xl">
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                Ultimated AI meal plans
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                Priority AI support
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                Cancel anytime
-              </li>
-            </ul>
-            <Button variant="subscribeMonthly">Subscribe Monthly Plan</Button>
-          </div>
-          <div className="border-2 border-gray-200 rounded-3xl shadow-xl flex flex-col gap-10 px-14 pt-7 pb-10 hover:scale-[1.02] duration-100">
-            <div className="text-2xl font-bold">Yearly Plan</div>
-            <div>
-              <span className="text-7xl font-bold">$299.99</span>
-              <span className="font-bold text-lg">/week</span>
-            </div>
-            <div className="text-xl">
-              Best value for those committed to imporving their diet long term.
-            </div>
-            <ul className="flex flex-col gap-3 text-xl">
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                Ultimated AI meal plans
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                All premium features
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckIcon className="w-7 text-emerald-600" />
-                Cancel anytime
-              </li>
-            </ul>
-            <Button variant="subscribe">Subscribe Yearly Plan</Button>
-          </div>
+          {SUBSCRIPTION_PLANS.map(
+            ({ interval, priceId, amount, label, description, services }) => (
+              <SubscriptionPlan
+                key={priceId}
+                interval={interval}
+                priceId={priceId}
+                amount={amount}
+                label={label}
+                description={description}
+                services={services}
+              />
+            )
+          )}
         </div>
       </div>
     </div>
