@@ -1,8 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { createCheckoutSession, SubscribeData } from "../api/apiServices";
-import { stripePromise } from "../utils/stripeClient";
+import { createCheckoutSession, SubscribeResponse } from "../api/apiServices";
 import { toast } from "react-toastify";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 export type ErrorResponse = {
   status?: number;
@@ -12,12 +14,12 @@ export type ErrorResponse = {
 
 const useCheckout = () => {
   return useMutation({
-    mutationFn: async ({ priceId, email }: SubscribeData) => {
-      const { sessionId } = await createCheckoutSession({ priceId, email });
+    mutationFn: createCheckoutSession,
+    onSuccess: async (data: SubscribeResponse) => {
+      const { sessionId } = data;
       const stripe = await stripePromise;
       if (!stripe) throw new Error("Stripe failed to load");
-      const { error } = await stripe.redirectToCheckout({ sessionId });
-      if (error) throw error;
+      await stripe.redirectToCheckout({ sessionId });
     },
     onError: (error: AxiosError) => {
       console.error("Error checking out:", error);

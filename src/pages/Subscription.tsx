@@ -1,7 +1,9 @@
 import { CheckIcon } from "@heroicons/react/16/solid";
 import Button from "../ui/Button";
+import useCheckout from "../hooks/useCheckout";
 
 const Subscription = () => {
+  const { mutate: checkout, isPending, isError, error } = useCheckout();
   return (
     <div>
       <div className="flex flex-col gap-5 items-center mx-20 rounded-xl py-10 my-10">
