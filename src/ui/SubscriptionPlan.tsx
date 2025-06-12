@@ -1,6 +1,8 @@
 import { CheckIcon } from "@heroicons/react/16/solid";
 import Button from "./Button";
 import { FC } from "react";
+import useCheckout from "../hooks/useCheckout";
+import { useAuthContext } from "../contexts/AuthContext";
 
 type SubscriptionPlanPops = {
   interval: string;
@@ -18,6 +20,8 @@ export const SubscriptionPlan: FC<SubscriptionPlanPops> = ({
   description,
   services,
 }) => {
+  const { mutate, isPending, isError, error } = useCheckout();
+  const { username } = useAuthContext();
   return (
     <div className="relative border-2 border-gray-200 rounded-3xl shadow-xl flex flex-col gap-10 px-14 pt-7 pb-10 hover:scale-[1.02] duration-100">
       {interval == "month" && (
@@ -32,14 +36,12 @@ export const SubscriptionPlan: FC<SubscriptionPlanPops> = ({
       </div>
       <div className="text-xl">{description}</div>
       <ul className="flex flex-col gap-3 text-xl">
-        {services.map((service) => {
-          return (
-            <li className="flex items-center gap-2">
-              <CheckIcon className="w-7 text-emerald-600" />
-              {service}
-            </li>
-          );
-        })}
+        {services.map((service) => (
+          <li className="flex items-center gap-2">
+            <CheckIcon className="w-7 text-emerald-600" />
+            {service}
+          </li>
+        ))}
       </ul>
       <Button variant={interval == "month" ? "subscribeMonthly" : "subscribe"}>
         Subscribe {label}

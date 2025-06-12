@@ -11,6 +11,7 @@ import { jwtDecode } from "jwt-decode";
 type AuthContextProps = {
   isLoggin: boolean;
   username: string | null;
+  email: string | null;
   token: string | null;
   redirectUrl: string | null;
   handleLogin: (token: string) => void;
@@ -39,33 +40,39 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
   const [isLoggin, setIsLoggin] = useState<boolean>(false);
   const [username, setUsername] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     const savedUsername = localStorage.getItem("username");
+    const savedEmail = localStorage.getItem("email");
     if (savedToken) {
       setIsLoggin(true);
       setUsername(savedUsername);
+      setEmail(savedEmail);
       setToken(savedToken);
     }
   }, []);
 
   const handleLogin = (newToken: string) => {
     const decoded = jwtDecode<JwtPayload>(newToken);
-    const { name } = decoded;
+    const { name, email } = decoded;
 
     localStorage.setItem("token", newToken);
     localStorage.setItem("username", name);
+    localStorage.setItem("email", email);
 
     setUsername(name);
+    setEmail(email);
     setIsLoggin(true);
     setToken(newToken);
   };
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    localStorage.removeItem("email");
     setIsLoggin(false);
     setUsername(null);
     setToken(null);
@@ -79,6 +86,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       value={{
         isLoggin,
         username,
+        email,
         token,
         redirectUrl,
         handleLogin,
