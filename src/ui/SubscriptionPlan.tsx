@@ -3,6 +3,8 @@ import Button from "./Button";
 import { FC } from "react";
 import useCheckout from "../hooks/useCheckout";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useModalContext } from "../contexts/ModalContext";
+import SignupLoginList from "./SignupLoginList";
 
 type SubscriptionPlanPops = {
   interval: string;
@@ -20,8 +22,14 @@ export const SubscriptionPlan: FC<SubscriptionPlanPops> = ({
   description,
   services,
 }) => {
-  const { mutate, isPending, isError, error } = useCheckout();
-  const { username } = useAuthContext();
+  const { mutate, isPending } = useCheckout();
+  const { isLoggin, email } = useAuthContext();
+  const { handleOpenModal } = useModalContext();
+  const handleSubscribe = (priceId: string) => {
+    if (!isLoggin || !email) {
+      handleOpenModal(<SignupLoginList />);
+    } else mutate({ priceId, email });
+  };
   return (
     <div className="relative border-2 border-gray-200 rounded-3xl shadow-xl flex flex-col gap-10 px-14 pt-7 pb-10 hover:scale-[1.02] duration-100">
       {interval == "month" && (
@@ -43,8 +51,12 @@ export const SubscriptionPlan: FC<SubscriptionPlanPops> = ({
           </li>
         ))}
       </ul>
-      <Button variant={interval == "month" ? "subscribeMonthly" : "subscribe"}>
-        Subscribe {label}
+      <Button
+        variant={interval == "month" ? "subscribeMonthly" : "subscribe"}
+        onClick={() => handleSubscribe(priceId)}
+        disabled={isPending}
+      >
+        {isPending ? "Processing" : `Subscribe ${label}`}
       </Button>
     </div>
   );
