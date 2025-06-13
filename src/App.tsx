@@ -11,6 +11,7 @@ function App() {
     <Routes>
       <Route element={<Applayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
         <Route path="subscription" element={<Subscription />} />
         <Route path="mealplan" element={<MealPlan />} />
