@@ -15,7 +15,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="profile" element={<Profile />} />
         <Route path="subscription" element={<Subscription />} />
-        <Route path="SubscribeSuccess" element={<SubscribeSuccess />} />
+        <Route path="subscribeSuccess" element={<SubscribeSuccess />} />
         <Route path="mealplan" element={<MealPlan />} />
       </Route>
     </Routes>

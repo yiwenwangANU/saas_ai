@@ -33,7 +33,7 @@ export const createCheckoutSession = async (
 
 export const confirmSubscription = async (): Promise<boolean> => {
   try {
-    const response = await axiosPrivate.post(`/api/confirm-subscription`);
+    const response = await axiosPrivate.get(`/api/stripe/confirm-subscription`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
