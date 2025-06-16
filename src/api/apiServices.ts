@@ -1,5 +1,5 @@
 import axios from "axios";
-import { axiosPrivate, axiosPublic } from "./axiosInstance";
+import { axiosPrivate } from "./axiosInstance";
 
 // Subscribe user
 export type SubscribeData = {
@@ -31,9 +31,9 @@ export const createCheckoutSession = async (
   }
 };
 
-export const checkSubscription = async (email: string): Promise<boolean> => {
+export const confirmSubscription = async (): Promise<boolean> => {
   try {
-    const response = await axiosPrivate.post(`/api/check-subscription`, email);
+    const response = await axiosPrivate.post(`/api/confirm-subscription`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
