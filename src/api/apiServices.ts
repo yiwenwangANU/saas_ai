@@ -34,7 +34,7 @@ export const createCheckoutSession = async (
 export const confirmSubscription = async (): Promise<boolean> => {
   try {
     const response = await axiosPrivate.get(`/api/stripe/confirm-subscription`);
-    return response.data;
+    return response.data.subscriptionActive;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios error:", error.message);
