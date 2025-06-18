@@ -28,9 +28,11 @@ const NavBar = () => {
                 Subscription
               </div>
             </Link>
-            <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
-              Items 2
-            </div>
+            <Link to={"mealplan"}>
+              <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
+                meal plan
+              </div>
+            </Link>
             <div className="rounded px-4 py-2 text-lg hover:bg-gray-100 cursor-pointer">
               Items 3
             </div>
