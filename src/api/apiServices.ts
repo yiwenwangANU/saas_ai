@@ -61,7 +61,7 @@ export const generateMealPlan = async (
 ): Promise<MealPlanResponse> => {
   try {
     const response = await axiosPrivate.post(`/generate`, mealPlanData);
-    return response.data.mealPlan;
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios error:", error.message);
