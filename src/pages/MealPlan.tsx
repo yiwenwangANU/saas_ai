@@ -2,19 +2,26 @@ import { Navigate } from "react-router";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Button from "../ui/Button";
+import useGeneratePlan from "../hooks/useGeneratePlan";
 
 type Inputs = {
   dietType: string;
-  calorie: string;
+  calories: string;
   allergies: string;
   prefer: string;
   snacks: boolean;
+  days: string;
 };
 
 const MealPlan = () => {
   const { isLoggin } = useAuthContext();
   const { register, handleSubmit } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const mutation = useGeneratePlan();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    mutation.mutate(data);
+  };
 
   if (!isLoggin) return <Navigate to="/" replace />;
   else
@@ -47,7 +54,7 @@ const MealPlan = () => {
                 className="bg-white rounded text-black px-2 py-2 w-full focus:outline-none"
                 id="calorie"
                 placeholder="e.g. 2000"
-                {...register("calorie", { required: true })}
+                {...register("calories", { required: true })}
               />
             </div>
             <div className="w-full">
@@ -78,6 +85,13 @@ const MealPlan = () => {
                 Include Snacks
               </label>
             </div>
+            <input
+              type="text"
+              hidden
+              defaultValue={7}
+              id="days"
+              {...register("days")}
+            />
 
             <Button variant="mealplan" type="submit">
               Generate Plan

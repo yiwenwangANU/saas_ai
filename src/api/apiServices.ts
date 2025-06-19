@@ -11,6 +11,17 @@ export type SubscribeResponse = {
   sessionId: string;
 };
 
+export type MealPlanData = {
+  dietType: string;
+  calories: string;
+  allergies: string;
+  prefer: string;
+  snacks: boolean;
+  days: string;
+};
+export type MealPlanResponse = {
+  mealPlan: boolean;
+};
 export const createCheckoutSession = async (
   subscribeData: SubscribeData
 ): Promise<SubscribeResponse> => {
@@ -35,6 +46,22 @@ export const confirmSubscription = async (): Promise<boolean> => {
   try {
     const response = await axiosPrivate.get(`/api/stripe/confirm-subscription`);
     return response.data.subscriptionActive;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error:", error.message);
+    } else if (error instanceof Error) {
+      console.error("Error:", error.message);
+    }
+    throw error; // Rethrow for error handling in components
+  }
+};
+
+export const generateMealPlan = async (
+  mealPlanData: MealPlanData
+): Promise<MealPlanResponse> => {
+  try {
+    const response = await axiosPrivate.post(`/generate`, mealPlanData);
+    return response.data.mealPlan;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios error:", error.message);
