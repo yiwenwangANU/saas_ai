@@ -8,7 +8,8 @@ type ButtonProps = {
     | "signup"
     | "getStart"
     | "subscribe"
-    | "subscribeMonthly";
+    | "subscribeMonthly"
+    | "mealplan";
   children: ReactNode;
 } & ComponentPropsWithoutRef<"button">;
 
@@ -46,6 +47,9 @@ const Button: FC<ButtonProps> = ({
     case "subscribeMonthly":
       variantStyles =
         "py-3 bg-emerald-600 text-white rounded hover:bg-emerald-700";
+      break;
+    case "mealplan":
+      variantStyles = "py-3 text-white rounded hover:bg-emerald-400";
       break;
   }
 
