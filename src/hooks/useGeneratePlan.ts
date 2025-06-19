@@ -8,8 +8,7 @@ const useGeneratePlan = () => {
   return useMutation({
     mutationFn: generateMealPlan,
     onSuccess: async (mealPlanResponse: MealPlanResponse) => {
-      const { mealPlan } = mealPlanResponse;
-      console.log(mealPlan);
+      console.log(mealPlanResponse);
     },
     onError: (error: AxiosError) => {
       console.error("Error checking out:", error);

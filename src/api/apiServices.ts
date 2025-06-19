@@ -20,7 +20,10 @@ export type MealPlanData = {
   days: string;
 };
 export type MealPlanResponse = {
-  mealPlan: boolean;
+  Breakfast?: string;
+  Lunch?: string;
+  Dinner?: string;
+  Snacks?: string;
 };
 export const createCheckoutSession = async (
   subscribeData: SubscribeData
