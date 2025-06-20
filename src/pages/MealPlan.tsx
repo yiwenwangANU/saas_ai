@@ -113,7 +113,7 @@ const MealPlan = () => {
             </Button>
           </form>
         </div>
-        <div className="col-span-4 rounded-r-2xl shadow-2xl">
+        <div className="col-span-4 rounded-r-2xl shadow-2xl bg-gray-50">
           <div className="text-emerald-500 text-3xl px-8 py-5 font-bold ">
             Weekly Meal Plan
           </div>
@@ -127,12 +127,28 @@ const MealPlan = () => {
                 if (!mealPlan.mealPlan?.[day])
                   return <div>Something went wrong, please try again!</div>;
                 return (
-                  <div>
-                    <div>{day}</div>
-                    <div>{mealPlan.mealPlan?.[day]?.Breakfast}</div>
-                    <div>{mealPlan.mealPlan?.[day]?.Lunch}</div>
-                    <div>{mealPlan.mealPlan?.[day]?.Dinner}</div>
-                    <div>{mealPlan.mealPlan?.[day]?.Snacks}</div>
+                  <div className="bg-white rounded-2xl px-8 py-5 my-6 mx-8 shadow-xl flex flex-col gap-3 hover:scale-[1.01]">
+                    <div className="text-2xl text-emerald-500 font-bold">
+                      {day}
+                    </div>
+                    <div className="text-lg">
+                      <span className="font-bold">Breakfast: </span>
+                      {mealPlan.mealPlan?.[day]?.Breakfast}
+                    </div>
+                    <div className="text-lg">
+                      <span className="font-bold">Lunch: </span>
+                      {mealPlan.mealPlan?.[day]?.Lunch}
+                    </div>
+                    <div className="text-lg">
+                      <span className="font-bold">Dinner: </span>
+                      {mealPlan.mealPlan?.[day]?.Dinner}
+                    </div>
+                    {!mealPlan.mealPlan?.[day]?.Snacks ? null : (
+                      <div className="text-lg">
+                        <span className="font-bold">Snacks: </span>
+                        {mealPlan.mealPlan?.[day]?.Snacks}
+                      </div>
+                    )}
                   </div>
                 );
               })}
