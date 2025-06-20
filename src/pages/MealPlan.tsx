@@ -113,7 +113,7 @@ const MealPlan = () => {
             </Button>
           </form>
         </div>
-        <div className="col-span-4 rounded-r-2xl shadow-2xl bg-gray-50">
+        <div className="col-span-4 rounded-r-2xl shadow-2xl bg-gray-50 h-[70vh] overflow-auto">
           <div className="text-emerald-500 text-3xl px-8 py-5 font-bold ">
             Weekly Meal Plan
           </div>
@@ -127,7 +127,7 @@ const MealPlan = () => {
                 if (!mealPlan.mealPlan?.[day])
                   return <div>Something went wrong, please try again!</div>;
                 return (
-                  <div className="bg-white rounded-2xl px-8 py-5 my-6 mx-8 shadow-xl flex flex-col gap-3 hover:scale-[1.01]">
+                  <div className="bg-white rounded-2xl px-8 py-5 my-6 mx-8 shadow-xl flex flex-col gap-3 hover:scale-[1.01] duration-75">
                     <div className="text-2xl text-emerald-500 font-bold">
                       {day}
                     </div>
