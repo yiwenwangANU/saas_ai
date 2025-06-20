@@ -20,6 +20,11 @@ export type MealPlanData = {
   days: string;
 };
 export type MealPlanResponse = {
+  mealPlan?: WeeklyMealPlan;
+  error?: string;
+};
+export type WeeklyMealPlan = { [day: string]: DailyMealPlan };
+export type DailyMealPlan = {
   Breakfast?: string;
   Lunch?: string;
   Dinner?: string;

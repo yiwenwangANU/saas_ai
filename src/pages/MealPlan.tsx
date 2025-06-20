@@ -16,11 +16,26 @@ type Inputs = {
 const MealPlan = () => {
   const { isLoggin } = useAuthContext();
   const { register, handleSubmit } = useForm<Inputs>();
-  const mutation = useGeneratePlan();
+  const {
+    mutate,
+    isPending,
+    data: mealPlan,
+    isError,
+    isSuccess,
+  } = useGeneratePlan();
+
+  const weekdays = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
-    mutation.mutate(data);
+    mutate(data);
   };
 
   if (!isLoggin) return <Navigate to="/" replace />;
@@ -93,8 +108,8 @@ const MealPlan = () => {
               {...register("days")}
             />
 
-            <Button variant="mealplan" type="submit">
-              Generate Plan
+            <Button variant="mealplan" type="submit" disabled={isPending}>
+              {isPending ? "Generating..." : "Generate Plan"}
             </Button>
           </form>
         </div>
@@ -102,6 +117,29 @@ const MealPlan = () => {
           <div className="text-emerald-500 text-3xl px-8 py-5 font-bold ">
             Weekly Meal Plan
           </div>
+          {isError ? (
+            <div>isError</div>
+          ) : isPending ? (
+            <div>isPending</div>
+          ) : isSuccess && mealPlan?.mealPlan ? (
+            <div>
+              {weekdays.map((day) => {
+                if (!mealPlan.mealPlan?.[day])
+                  return <div>Something went wrong, please try again!</div>;
+                return (
+                  <div>
+                    <div>{day}</div>
+                    <div>{mealPlan.mealPlan?.[day]?.Breakfast}</div>
+                    <div>{mealPlan.mealPlan?.[day]?.Lunch}</div>
+                    <div>{mealPlan.mealPlan?.[day]?.Dinner}</div>
+                    <div>{mealPlan.mealPlan?.[day]?.Snacks}</div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div>Please generate a meal plan to see it here.</div>
+          )}
         </div>
       </div>
     );
